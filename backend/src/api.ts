@@ -21,7 +21,15 @@ function getErrorMessage(data: unknown, fallback: string): string {
     }
 
     if (Array.isArray(record.dueDate)) {
-      return record.dueDate.join(", ");
+      return record.dueDate.map(String).join(", ");
+    }
+
+    if (typeof record.status === "string") {
+      return record.status;
+    }
+
+    if (typeof record.title === "string") {
+      return record.title;
     }
   }
 
@@ -70,7 +78,7 @@ export function createTask(task: TaskCreateOrUpdate): Promise<Task> {
 
 export function updateTask(
   id: number,
-  task: TaskCreateOrUpdate
+  task: TaskCreateOrUpdate,
 ): Promise<Task> {
   return request<Task>(`/api/tasks/${id}/`, {
     method: "PUT",
