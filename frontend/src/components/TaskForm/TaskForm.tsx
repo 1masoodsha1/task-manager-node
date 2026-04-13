@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./TaskForm.css";
-import type { Task, TaskCreateOrUpdate, TaskStatus } from "../types";
+import type { Task, TaskCreateOrUpdate, TaskStatus } from "../../types";
 
 type TaskFormProps = {
   initialTask: Task | null;
@@ -72,7 +72,9 @@ export default function TaskForm({
     new Date(form.dueDate).getTime() < new Date().getTime();
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = event.target;
 

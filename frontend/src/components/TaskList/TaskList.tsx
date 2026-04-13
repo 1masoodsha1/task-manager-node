@@ -1,5 +1,5 @@
 import "./TaskList.css";
-import type { Task } from "../types";
+import type { Task } from "../../types";
 
 type TaskListProps = {
   tasks: Task[];
