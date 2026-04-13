@@ -1,0 +1,90 @@
+.task-list {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.list-header,
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.list-header {
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.list-header h3 {
+  margin: 0;
+}
+
+.list-header button,
+.actions button {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #f3f3f3;
+  color: #111;
+  cursor: pointer;
+}
+
+.list-header button:hover:not(:disabled),
+.actions button:hover {
+  background: #e8e8e8;
+}
+
+.list-header button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.task-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  border-top: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.task-list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.meta,
+.desc {
+  margin-top: 4px;
+  color: #555;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.overdue-badge {
+  color: #c00;
+  font-weight: 700;
+}
+
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .actions {
+    align-items: stretch;
+  }
+}

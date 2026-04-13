@@ -1,36 +1,56 @@
-// src/services/taskService.ts
 import { AppDataSource } from "../data-source";
-import { Task, TaskStatus } from "../entity/Task";
+import { Task } from "../entity/Task";
+import {
+normalizeAndValidateTaskInput,
+notFoundError,
+type TaskPayload,
+} from "../schemas/taskSchemas";
 
 export class TaskService {
-  private taskRepo = AppDataSource.getRepository(Task);
+private readonly taskRepo = AppDataSource.getRepository(Task);
 
-  async getAllTasks(): Promise<Task[]> {
-    return this.taskRepo.find();
+async getAllTasks(): Promise<Task[]> {
+    return this.taskRepo.find({
+      order: {
+        id: "ASC",
+      },
+    });
   }
 
   async getTask(id: number): Promise<Task> {
-    const t = await this.taskRepo.findOneBy({ id });
-    if (!t) throw { status: 404, message: `Task not found: ${id}` };
-    return t;
+    if (!Number.isInteger(id) || id <= 0) {
+      throw notFoundError();
+    }
+
+    const task = await this.taskRepo.findOneBy({ id });
+
+    if (!task) {
+      throw notFoundError();
+    }
+
+    return task;
   }
 
-  async createTask(payload: Partial<Task>): Promise<Task> {
-    const t = this.taskRepo.create(payload);
-    return this.taskRepo.save(t);
+  async createTask(payload: TaskPayload): Promise<Task> {
+    const normalized = normalizeAndValidateTaskInput(payload);
+    const task = this.taskRepo.create(normalized);
+    return this.taskRepo.save(task);
   }
 
-  async updateTask(id: number, updated: Partial<Task>): Promise<Task> {
-    const existing = await this.getTask(id); // will throw 404 if missing
-    existing.title = updated.title ?? existing.title;
-    existing.description = updated.description ?? existing.description;
-    existing.status = (updated.status as TaskStatus) ?? existing.status;
-    existing.dueDate = updated.dueDate ?? existing.dueDate;
+  async updateTask(id: number, payload: TaskPayload): Promise<Task> {
+    const existing = await this.getTask(id);
+    const normalized = normalizeAndValidateTaskInput(payload);
+
+    existing.title = normalized.title;
+    existing.description = normalized.description;
+    existing.status = normalized.status;
+    existing.dueDate = normalized.dueDate;
+
     return this.taskRepo.save(existing);
   }
 
   async deleteTask(id: number): Promise<void> {
-    const res = await this.taskRepo.delete({ id });
-    if (res.affected === 0) throw { status: 404, message: `Task not found: ${id}` };
+    const existing = await this.getTask(id);
+    await this.taskRepo.remove(existing);
   }
 }

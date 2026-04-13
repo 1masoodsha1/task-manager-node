@@ -4,10 +4,9 @@ import { DataSource } from "typeorm";
 import { Task } from "./entity/Task";
 
 export const AppDataSource = new DataSource({
-  type: "sqlite",
-  database: path.join(__dirname, "../data/appdb.sqlite"),
-  synchronize: true, // dev convenience (like H2). Use migrations in prod.
+type: "sqlite",
+database: path.join(__dirname, "../data/appdb.db"),
+  synchronize: true,
   logging: false,
   entities: [Task],
-  migrations: [],
 });
