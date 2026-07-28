@@ -1,0 +1,41 @@
+.page {
+  padding: 17px;
+  font-family: Arial, sans-serif;
+}
+
+.page-header {
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  margin: 0 0 6px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin: 0;
+  color: #555;
+}
+
+.layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.layout-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.alert-error {
+  color: #c00;
+  padding: 8px 0;
+}
+
+@media (max-width: 800px) {
+  .layout {
+    flex-direction: column;
+  }
+}

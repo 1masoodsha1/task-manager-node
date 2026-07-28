@@ -1,0 +1,72 @@
+.task-form {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.task-form-group {
+  margin-bottom: 12px;
+}
+
+.task-form-group:last-of-type {
+  margin-bottom: 12px;
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #fff;
+  color: #111;
+}
+
+.task-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.task-form input:focus,
+.task-form textarea:focus,
+.task-form select:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttons button {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background: #f3f3f3;
+  color: #111;
+  cursor: pointer;
+}
+
+.buttons button:hover:not(:disabled) {
+  background: #e8e8e8;
+}
+
+.buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #c00;
+  padding: 8px 0 0;
+}

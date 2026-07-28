@@ -1,0 +1,23 @@
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html,
+body {
+  margin: 0;
+  background: #f6f7fb;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: #111;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
